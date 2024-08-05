@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="all" />
+    <meta name="author" content="spiderbuf" />
+    <meta name="copyright" content="spiderbuf" />
+    <link rel="stylesheet" href="/static/css/default.css">
+    <meta name="keywords"
+        content="python,python 爬虫,xpath,selenium,爬虫训练,爬虫攻防,爬虫,反爬,robots,user agent,数据分析,爬虫练习网站,在线工具" />
+    <meta name="description"
+        content="这是一个网络爬虫练习网页，请尝试分析本页面并编写爬虫代码爬取及解析本页面内容。如果你在开发爬虫的过程中遇到问题，可以查看对应的爬虫教学视频及示例代码。调试爬虫的过程中请注意代码的严谨性，请勿对本网站造成过于大量的访问流量。" />
+    <title>ajax动态加载数据的爬取_S07_Spiderbuf</title>
+</head>
+
+<body><nav class="navbar">
+    <div style="display: -webkit-flex;display: flex;flex: 20%;align-items: center;font-size: 18px;padding-left: 15px;">
+        <a class="navbar-brand" href="http://www.spiderbuf.cn" style="color: #ffffff" title="Spiderbuf首页">Spiderbuf</a>
+    </div>
+    <div style="display: -webkit-flex;display: flex;flex: 80%;align-items: center;justify-content: flex-end;">
+        <ul class="nav-menu">
+            <li><a href="/tools" title="在线工具">在线工具</a></li>
+            <li><a href="/list" title="进入爬虫练习靶场">进入靶场</a></li>
+            <li><a href="https://space.bilibili.com/387313518/channel/seriesdetail?sid=282719" target="_blank"
+                    title="Python爬虫免费视频教程">视频教程</a></li>
+            <li><a href="/articles" title="技术文章 | Spiderbuf">技术文章</a></li>
+            <li><a href="/guide" title="Spiderbuf使用指南">使用指南</a></li>
+            <li><a href="/sponsor" rel="noreferrer" title="请作者喝咖啡"><svg viewBox="0 0 24 24"
+                        width="1.2em" height="1.2em" font-size="16"
+                        class="text-gray-500 hover:text-amber-500 dark:text-gray-400 dark:hover:text-amber-500">
+                        <path fill="currentColor"
+                            d="M2 21h18v-2H2M20 8h-2V5h2m0-2H4v10a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z">
+                        </path>
+                    </svg></a></li>
+            <li><a href="https://github.com/hhuayuan/spiderbuf" target="_blank" rel="noreferrer" title="GitHub项目主页"><svg
+                        viewBox="0 0 24 24" width="1.2em" height="1.2em" font-size="15"
+                        class="text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-100">
+                        <path fill="currentColor"
+                            d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12">
+                        </path>
+                    </svg></a></li>
+        </ul>
+    </div>
+</nav><main style="display: -webkit-flex;display: flex;justify-content: space-around; margin: 0px;padding: 0px;">
+        <div style="flex: 0 0 15%;"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4169504979687359"
+    crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4169504979687359" data-ad-slot="9021161584"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+        <div style="flex: 0 0 68%;">
+            <h3>设备信息</h3>
+            <div class="table-responsive">
+                <table class="table" id="mytable">
+                    <thead>
+                        <th>IP地址</th>
+                        <th>MAC地址</th>
+                        <th>设备名称</th>
+                        <th>设备类型</th>
+                        <th>操作系统</th>
+                        <th>开放端口</th>
+                        <th>在线状态</th>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div style="flex: 0 0 15%;"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4169504979687359"
+    crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4169504979687359" data-ad-slot="9021161584"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+    </main>
+    <div style="text-align: center;"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4169504979687359"
+    crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4169504979687359" data-ad-slot="6722548729"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><footer>
+    <div class="copyright">
+        <a href="https://beian.miit.gov.cn/" target="_blank" title="Spiderbuf ICP备案号">粤ICP备2021093459.</a>
+        <span>All rights reserved.</span>
+        <a href="/about" target="_blank" title="关于Spiderbuf">关于我们</a>
+        <a href="/privacy" target="_blank" title="Spiderbuf网站隐私政策">隐私政策</a>
+    </div>
+</footer></body>
+<script type="text/javascript">
+    fetch("/playground/iplist").then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        var dataContent = document.getElementById('mytable');
+        data.forEach((value, index) => {
+            var row = dataContent.insertRow();
+            var ip = row.insertCell();
+            ip.innerText = value.ip;
+
+            var mac = row.insertCell();
+            mac.innerText = value.mac;
+
+            var name = row.insertCell();
+            name.innerText = value.name;
+
+            var manufacturer = row.insertCell();
+            manufacturer.innerText = value.manufacturer;
+
+            var system = row.insertCell();
+            system.innerText = value.system;
+
+            var ports = row.insertCell();
+            ports.innerText = value.ports;
+
+            var status = row.insertCell();
+            status.innerText = value.status;
+        })
+    });
+</script>
+</html>
